@@ -1,0 +1,17 @@
+<h2>Tickets</h2>
+
+<ul>
+    <li *ngFor="let ticket of tickets$ | async">
+        Ticket: {{ ticket.id }}, {{ ticket.description }}
+        <button mat-button (click)="goToDetail(ticket.id)">See ticket details</button>
+    </li>
+</ul>
+<div class="form-group">
+    <button mat-button (click)="toggleDisplayForm()">Create new ticket</button>
+    <form (ngSubmit)="createNewTicket()" *ngIf="isShowForm">
+        <p>*** Creation of new ticket pending... ***</p>
+        <label>Ticket description: </label>
+        <input type="text" [formControl]="ticketDescription" id="ticketDescription" maxlength="100">
+        <button type="submit">Valider</button>
+    </form>
+</div>

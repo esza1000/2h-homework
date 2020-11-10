@@ -1,0 +1,11 @@
+.undone {
+    color: red;
+}
+
+.done {
+    color: green;
+}
+
+#assignment {
+    margin-top: 15px;
+}

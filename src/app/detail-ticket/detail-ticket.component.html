@@ -1,0 +1,32 @@
+<div *ngIf="ticket$ | async as ticket">
+    This ticket has the following characteristics
+    <ul>
+        <li>Id: {{ ticket.id }}</li>
+        <li>Description: {{ ticket.description }}</li>
+    </ul>
+    <div id="status">
+        <ul>
+            <li *ngIf="assigned">Assigned To: <span class="done">{{ user.name }}</span>
+            </li>
+            <li *ngIf="!assigned"><span class="undone">Unassigned</span></li>
+            <li *ngIf="completed">Status: <span class="done">Resolved</span></li>
+        </ul>
+    </div>
+
+    <div id="assignment">
+        Assign this ticket to:
+        <form (ngSubmit)="assignTicket(ticketId, user.id)">
+            <select name="user" [(ngModel)]="user">
+                <option value="" selected="selected" disabled="disabled">Sélectionner l'utilisateur</option>
+                <option *ngFor="let user of users$ | async" [ngValue]="user">{{user.name}}</option>
+            </select>
+            <button type="submit">Valider</button>
+        </form>
+    </div>
+
+    <div *ngIf="assigned">
+        Complete the task:
+            <input type="checkbox" id="completeTask" (click)="completeTicket(ticketId)" />
+    </div>
+</div>
+
